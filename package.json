@@ -1,0 +1,24 @@
+{
+  "name": "job-listing-app-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "app.ts",
+  "scripts": {
+    "start": "nodemon --exec tsx --env-file=.env.local app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Chris Chua",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "nodemon": "^3.1.4",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3"
+  }
+}

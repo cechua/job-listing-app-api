@@ -1,4 +1,5 @@
 import { Strategy as GoogleStrategy } from 'passport-google-oauth2';
+import User from '../models/User';
 
 // const serverUrl =
 //   process.env.NODE_ENV === 'production'
@@ -15,29 +16,25 @@ const googleLogin = new GoogleStrategy(
     proxy: true,
   },
   async (accessToken, refreshToken, profile, done) => {
-    // console.log(profile);
-    // try {
-    //   const oldUser = await User.findOne({ email: profile.email });
+    try {
+      const oldUser = await User.findOne({ email: profile.email });
 
-    //   if (oldUser) {
-    //     return done(null, oldUser);
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
+      if (oldUser) {
+        return done(null, oldUser);
+      }
+    } catch (err) {
+      console.log(err);
+    }
 
     try {
-      const newUser = {
+      const newUser = await new User({
         provider: 'google',
         googleId: profile.id,
-        username: `user${profile.id}`,
+        username: `user_${profile.id}`,
         email: profile.email,
         name: profile.displayName,
         avatar: profile.picture,
-      };
-
-      //TODO: SAVE TO DATABASE
-
+      }).save();
       done(null, newUser);
     } catch (err) {
       console.log(err);

@@ -32,6 +32,6 @@ export const isAuthenticated = (
       error: error.message,
     });
   }
-  req.userId = decodedToken.userId;
+  req.user.userId = decodedToken.userId;
   next();
 };
